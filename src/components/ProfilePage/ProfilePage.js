@@ -1,11 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ProfileForm from './ProfileForm/ProfileForm'
 
-class ProfilePage extends Component {
-
-    render() {
-        return <ProfileForm />
-    }
+export const ProfilePage = ({setForm}) => {
+        return <ProfileForm/>
 }
-
-export default ProfilePage

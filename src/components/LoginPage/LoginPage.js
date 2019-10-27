@@ -1,35 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import "./LoginPage.css";
-import LoginForm from "./LoginForm/LoginForm";
-import RegistrationPage from "../RegistrationPage/RegistrationPage";
+import { LoginForm } from "./LoginForm/LoginForm";
+import { RegPage } from './../RegistrationPage/RegistrationPage'
+import  MapPage from './../MapPage/MapPage'
+import { ProfilePage } from './../ProfilePage/ProfilePage'
 
-function IsLoged (props) {
-    return <LoginForm />
 
-}
+export const LoginPage = ({useState}) =>{
 
-function IsNotLogged (props) {
-    return <RegistrationPage />
-}
+    const [page, setForm]  = React.useState('loginform')
+    console.log('Login Page: ' + page);
 
-function IsLogPage(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if (isLoggedIn) {
-      return <IsLoged />;
-    }
-    return <IsNotLogged />;
-  }
-
-class LoginPage extends Component {
-    state = {
-        lo: true
-  }
-
-  render() {
     return (
-        <IsLogPage isLoggedIn = {this.state.lo} />
+    <div>
+      <div>
+            {page === 'loginform' && <LoginForm setForm = {setForm}/>}
+            {page === 'profile' && <ProfilePage setForm = {setForm}/>}
+            {page === 'singupform' && <RegPage setForm = {setForm}/>}
+            {page === 'map' && <MapPage setForm = {setForm}/>}
+      </div>
+      </div>
     )
-  }
 }
-
-export default LoginPage

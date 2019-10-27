@@ -7,11 +7,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
-const LoginForm = ({ setPage }) => {
-  const onSubmit = event => {
-    event.preventDefault();
-    setPage("map");
-  };
+
+export const LoginForm = ({ setForm }) => {
 
   return (
     <div className="LoginPage">
@@ -28,7 +25,7 @@ const LoginForm = ({ setPage }) => {
           </Typography>
           <p>
             Новый пользователь? &nbsp;
-            <Link href="/registration">
+            <Link onClick={() => setForm('singupform')} >
               Зарегистрируйтесь
             </Link>
           </p>
@@ -49,9 +46,8 @@ const LoginForm = ({ setPage }) => {
             required
           />
           <Button
-            onSubmit={onSubmit}
+            onClick={() => setForm('map')}
             type="submit"
-            href="/map"
             variant="contained"
             style={{ marginTop: "40px" }}
             size="medium"
@@ -65,5 +61,3 @@ const LoginForm = ({ setPage }) => {
     </div>
   );
 };
-
-export default LoginForm;
