@@ -21,7 +21,6 @@ export const Header = ({setPage}) => {
           <Button onClick={() => setPage('map')}>Карта</Button>
           <Button onClick={() => setPage('profile')} >Профиль</Button>
           <Button onClick={() => setPage('login')} >Войти</Button>
-          <Button onClick={() => setPage('singup')} >Регистрация</Button>
         </Toolbar>
       </AppBar>
     )
