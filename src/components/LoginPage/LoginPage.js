@@ -1,24 +1,19 @@
-import React from "react";
-import "./LoginPage.css";
-import { LoginForm } from "./LoginForm/LoginForm";
-import { RegPage } from './../RegistrationPage/RegistrationPage'
-import  MapPage from './../MapPage/MapPage'
-import { ProfilePage } from './../ProfilePage/ProfilePage'
+  
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { LoginForm } from './LoginForm/LoginForm';
+import { AuthContext } from '../../modules/module'
 
+export const LoginPage = () => {
 
-export const LoginPage = ({useState}) =>{
+  const { isLoggedIn }  = React.useContext(AuthContext);
 
-    const [page, setForm]  = React.useState('loginform')
-    console.log('Login Page: ' + page);
+  console.log(isLoggedIn)
 
-    return (
-    <div>
-      <div>
-            {page === 'loginform' && <LoginForm setForm = {setForm}/>}
-            {page === 'profile' && <ProfilePage setForm = {setForm}/>}
-            {page === 'singupform' && <RegPage setForm = {setForm}/>}
-            {page === 'map' && <MapPage setForm = {setForm}/>}
-      </div>
-      </div>
-    )
+  if (isLoggedIn) {
+    
+    return <NavLink to="/map" />
+  }
+
+  return <LoginForm />
 }

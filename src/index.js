@@ -1,8 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import  { App } from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Layout from "./components/Layout/Layout";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from './modules/module'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-serviceWorker.unregister();
+import "./index.css";
+
+ReactDOM.render(
+
+<AuthProvider>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+</AuthProvider>,
+
+  document.getElementById("root")
+)

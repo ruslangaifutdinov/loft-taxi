@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom'
 import "../LoginPage/LoginForm/LoginForm.css";
 
 import Paper from "@material-ui/core/Card";
@@ -7,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
-export const RegPage = ({setForm}) => {
+export const SingOn = () => {
 
   return (
     <div className="LoginPage">
@@ -24,7 +25,7 @@ export const RegPage = ({setForm}) => {
           </Typography>
           <p>
             Уже зарегистрированы? &nbsp;
-            <Link onClick={() => setForm('loginform')}>Войти</Link>
+            <Link component={ NavLink } to="/login">Войти</Link>
           </p>
           <TextField
             type="text"
@@ -62,10 +63,10 @@ export const RegPage = ({setForm}) => {
             required
           />
           <Button
-            onClick={() => setForm('map')}
+            component={ NavLink } to='/login'
             type="submit"
             variant="contained"
-            style={{ marginTop: "40px" }}
+            style={{ marginTop: "40px", backgroundColor: "#ffc617", color: "black" }}
             size="medium"
             color="secondary"
             align="right"
