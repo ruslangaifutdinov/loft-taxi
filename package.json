@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^9.3.2",
     "cz-conventional-changelog": "^3.0.2"
   },
   "config": {
