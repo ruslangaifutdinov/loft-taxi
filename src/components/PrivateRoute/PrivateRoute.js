@@ -4,12 +4,13 @@ import { AuthContext } from '../../modules/module'
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   
-  const { isLoggedIn }  = React.useContext(AuthContext);
-  console.log('Private Route console' + isLoggedIn)
+  let { isLoggedIn }  = React.useContext(AuthContext);
+  
+  console.log('Private Route console: ' + isLoggedIn)
 
   console.log(Component)
-  
-  if (isLoggedIn) {
+
+  if (!isLoggedIn) {
 
     return <Component {...props} />;
   }
