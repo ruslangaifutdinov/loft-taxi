@@ -20,7 +20,7 @@ export const Header = ()  => {
 
     return (
 
-      <AppBar className="Header" color="inherit">
+      <AppBar className="Header" color="inherit" data-testid="header">
         <Toolbar>
           <Typography className="Loft_Taxi">
               <img

@@ -12,9 +12,9 @@ import "./Layout.css"
 
 const Layout = () => {
   return (
-    <>
+    <div>
     <Header />
-    <main>
+    <main data-testid="login-form">
       <Switch>
         <Redirect from="/" exact to="/login" />
           <Route path="/login" exact component={LoginPage} />
@@ -24,7 +24,7 @@ const Layout = () => {
         <Redirect to="/" />
       </Switch>
       </main>
-    </>
+    </div>
   )
 }
 

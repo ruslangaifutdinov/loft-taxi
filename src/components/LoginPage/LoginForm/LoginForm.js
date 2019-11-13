@@ -24,7 +24,7 @@ export const LoginForm = () => {
           />
         </Typography>
         <Paper className="paper">
-          <form className="form" data-testid="login-form">
+          <form className="form">
             <Typography variant="h3" color="inherit">
               Войти
             </Typography>
