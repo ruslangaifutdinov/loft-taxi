@@ -6,9 +6,7 @@ import { Header } from "../Header/Header"
 import { LoginPage } from "../LoginPage/LoginPage"
 import { ProfilePage } from '../ProfilePage/ProfilePage'
 import { SingOn } from '../RegistrationPage/RegistrationPage'
-
 import "./Layout.css"
-
 
 const Layout = () => {
   return (
