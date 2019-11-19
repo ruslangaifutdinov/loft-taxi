@@ -1,6 +1,14 @@
-import React from 'react'
-import ProfileForm from './ProfileForm/ProfileForm'
+import React, { Component } from "react"
+import ProfileForm from "./ProfileForm/ProfileForm"
 
-export const ProfilePage = () => {
-        return <ProfileForm/>
+class ProfilePage extends Component {
+  componentDidMount() {
+    document.title = "Профиль | Loft Taxi"
+  }
+
+  render() {
+    return <ProfileForm />
+  }
 }
+
+export default ProfilePage

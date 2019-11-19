@@ -1,19 +1,25 @@
-  
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { LoginForm } from './LoginForm/LoginForm';
-import { AuthContext } from '../../modules/module'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-export const LoginPage = () => {
+import LoginForm from '../LoginForm/LoginForm';
 
-  const { isLoggedIn }  = React.useContext(AuthContext);
-
-  console.log(isLoggedIn)
-
-  if (isLoggedIn) {
-    
-    return <NavLink to="/map" />
+class LoginPage extends Component {
+  componentDidMount() {
+    document.title = 'Войти | Loft Taxi';
   }
 
-  return <LoginForm />
+  render() {
+    const { isLoggedIn } = this.props;
+
+    if (isLoggedIn) {
+      return <Redirect to="/map" />;
+    }
+
+    return <LoginForm />;
+  }
 }
+
+const mapStateToProps = state => state.auth;
+
+export default connect(mapStateToProps)(LoginPage);

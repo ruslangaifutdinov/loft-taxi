@@ -1,18 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Layout from "./components/Layout/Layout";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from './modules/module'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import createAppStore from './redux/store/store';
 
-import "./index.css";
+
+import './index.css';
+import Layout from './components/Layout/Layout';
+
+const store = createAppStore();
 
 ReactDOM.render(
-
-<AuthProvider>
+  <Provider store={store}>
     <BrowserRouter>
       <Layout />
     </BrowserRouter>
-</AuthProvider>,
-
-  document.getElementById("root")
-)
+  </Provider>,
+  document.getElementById('root')
+);

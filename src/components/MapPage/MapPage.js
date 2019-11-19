@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import mapboxgl from 'mapbox-gl'
+import  mapboxgl from 'mapbox-gl'
 import './MapPage.css'
 
 class MapPage extends Component {
@@ -15,6 +15,8 @@ class MapPage extends Component {
           center: [30.2656504, 59.8029126],
           zoom: 15
         });
+
+        document.title = 'Карта | Loft Taxi';
       }
 
     render() {

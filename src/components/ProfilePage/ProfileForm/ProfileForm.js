@@ -11,8 +11,8 @@ class ProfileForm extends Component {
 
     render () {
         return (
-            <div className="container">
-            <Paper className="paper">
+            <div className="ProfilePage">
+            <Paper className="profile-paper-page">
               <Typography variant="h3" color="inherit" align="center">
                 Профиль
               </Typography>
@@ -27,7 +27,7 @@ class ProfileForm extends Component {
                   name="cardName"
                   margin="none"
                   autoComplete="cc-name"
-                  fullWidth
+                  fullwidth="true"
                   required
                 />
                 <NumberFormat
@@ -36,7 +36,7 @@ class ProfileForm extends Component {
                   name="cardNumber"
                   margin="none"
                   autoComplete="cc-number"
-                  fullWidth
+                  fullwidth="true"
                   required
                   format="#### #### #### ####"
                 />
@@ -46,7 +46,7 @@ class ProfileForm extends Component {
                   name="cardExp"
                   margin="none"
                   autoComplete="cc-exp"
-                  fullWidth
+                  fullwidth="true"
                   required
                   format="##/##"
                 />
@@ -58,13 +58,14 @@ class ProfileForm extends Component {
                   name="cardCvv"
                   margin="none"
                   autoComplete="cc-csc"
-                  fullWidth
+                  fullwidth="true"
                   required
                   format="###"
                 />
                 <Button
                   type="submit"
                   variant="contained"
+                  style={{ marginTop: "40px", backgroundColor: "#ffc617" }}
                   size="medium"
                   color="primary"
                 >

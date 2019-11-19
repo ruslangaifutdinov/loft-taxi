@@ -1,21 +1,83 @@
-import React from "react";
-import "./LoginForm.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAuthRequest } from '../../redux/reducer';
 import { NavLink } from 'react-router-dom'
-import Paper from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import './LoginForm.css';
+import Paper from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Link from "@material-ui/core/Link";
-import PropTypes from 'prop-types';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-TextField.propTypes = {
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string
-}
+class LoginForm extends Component {
+  state = {
+    login: {
+      value: '',
+      error: null
+    },
+    password: {
+      value: '',
+      error: null
+    }
+  };
 
-export const LoginForm = () => {
+  handleChange = e => {
+    const { name, value } = e.target;
 
-      return (
+    this.setState({
+      [name]: {
+        value,
+        error: null
+      }
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { login, password } = this.state;
+    const { fetchAuthRequest } = this.props;
+
+    if (!login.value || !password.value) {
+      this.setState(state => {
+        const { login, password } = state;
+
+        return {
+          ...state,
+          login: {
+            value: login.value,
+            error: login.value ? null : 'Укажите имя пользователя'
+          },
+          password: {
+            value: password.value,
+            error: password.value ? null : 'Укажите пароль'
+          }
+        };
+      });
+    } else {
+      const data = {
+        login: login.value,
+        password: password.value
+      };
+
+      fetchAuthRequest(data);
+    }
+  };
+
+  renderErrorMessage = message => (
+    <Typography color="error" align="center">
+      {message}
+    </Typography>
+  );
+
+  render() {
+
+    const { login, password } = this.state;
+    console.log('Login Form login:' + login + 'Password:' +password)
+    const { isLoading, error } = this.props;
+
+    return (
       <div className="LoginPage">
         <Typography>
           <img
@@ -24,21 +86,28 @@ export const LoginForm = () => {
           />
         </Typography>
         <Paper className="paper">
-          <form className="form">
+          <form className="form" onSubmit={this.handleSubmit} noValidate>
             <Typography variant="h3" color="inherit">
               Войти
             </Typography>
             <p>
               Новый пользователь? &nbsp;
-              <Link component={ NavLink } to="/singon">
+              <Link component={ NavLink } to='/singup'>
                 Зарегистрируйтесь
               </Link>
             </p>
+            {error && this.renderErrorMessage(error)}
+            {isLoading && <LinearProgress />}
             <TextField
               type="text"
               label="Имя пользователя"
               placeholder="Имя пользователя"
-              name="name"
+              name="login"
+              value={login.value}
+              onChange={this.handleChange}
+              helperText={login.error ? login.error : null}
+              error={login.error ? true : false}
+              margin="none"
               fullWidth
               required
             />
@@ -47,14 +116,18 @@ export const LoginForm = () => {
               label="Пароль"
               placeholder="Пароль"
               name="password"
+              value={password.value}
+              onChange={this.handleChange}
+              helperText={password.error ? password.error : null}
+              error={password.error ? true : false}
+              margin="none"
               fullWidth
               required
             />
             <Button
-              component={ NavLink } to="/map"
               type="submit"
               variant="contained"
-              style={{ marginTop: "40px", backgroundColor: "#ffc617" }}
+              style={{ marginTop: "40px", backgroundColor: "#ffc617", boxShadow: "none" }}
               size="medium"
               align="right"
             >
@@ -63,5 +136,16 @@ export const LoginForm = () => {
           </form>
         </Paper>
       </div>
-    )
+    );
+  }
 }
+
+const mapStateToProps = ({ auth }) => auth;
+const mapDispatchToProps = {
+  fetchAuthRequest
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);

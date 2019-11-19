@@ -1,21 +1,21 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../modules/module'
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const PrivateRoute = ({ component: Component, ...props }) => {
+const PrivateRoute = ({ isLoggedIn, component: Component, ...props }) => {
   
-  let { isLoggedIn }  = React.useContext(AuthContext);
-  
-  console.log('Private Route console: ' + isLoggedIn)
-
   console.log(Component)
-
-  if (!isLoggedIn) {
-
+  if (isLoggedIn) {
     return <Component {...props} />;
   }
 
-  return <NavLink to="/login" />;
+  if (!isLoggedIn) {
+    return <Redirect to="/singup" />;
+  }
+
+  return <Redirect to="/login" />;
 };
 
-export default PrivateRoute
+const mapStateToProps = state => state.auth;
+
+export default connect(mapStateToProps)(PrivateRoute);
