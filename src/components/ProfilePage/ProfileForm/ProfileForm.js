@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button';
 class ProfileForm extends Component {
 
     render () {
+
+      
         return (
             <div className="ProfilePage">
             <Paper className="profile-paper-page">
