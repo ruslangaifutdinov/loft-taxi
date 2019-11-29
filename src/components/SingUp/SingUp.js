@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { sendRegistrationRequest } from '../../redux/reducer';
 import "../LoginForm/LoginForm.css";
-
+import {sendRegisterRequest} from '../../redux/reducer'
 import Paper from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import Link from "@material-ui/core/Link"
+
+import {
+	getIsLoggedIn,
+	getError
+} from '../../redux/reducer/rootReducer'
 
 class SingUp extends Component {
 
@@ -16,7 +20,19 @@ class SingUp extends Component {
     document.title = "Регистрация | Loft Taxi"
   }
 
+  
+  handleSubmit = data => {
+    const { sendRegisterRequest } = this.props
+    
+    sendRegisterRequest(data)
+    console.log (data)
+  }
+
+
   render() {
+
+    const { register, setValue } = this.props;
+
     return (
       <div className="LoginPage">
         <Typography>
@@ -26,7 +42,7 @@ class SingUp extends Component {
           />
         </Typography>
         <Paper className="paper">
-          <form className="form">
+          <form className="form" onSubmit={this.handleSubmit}>
             <Typography variant="h3" color="inherit">
               Регистрация
             </Typography>
@@ -38,6 +54,8 @@ class SingUp extends Component {
               type="text"
               label="Адрес электронной почты*"
               placeholder="Адрес электронной почты*"
+              register={register}
+              setvalue={setValue}
               name="mail"
               fullWidth
               required
@@ -48,6 +66,8 @@ class SingUp extends Component {
               label="Имя"
               placeholder="Имя"
               name="firstName"
+              register={register}
+							setvalue={setValue}
               required
               className="firstName"
             />
@@ -56,6 +76,8 @@ class SingUp extends Component {
               label="Фамилия"
               placeholder="Фамилия"
               name="secondName"
+              register={register}
+							setvalue={setValue}
               required
               className="firstName"
             />
@@ -66,6 +88,8 @@ class SingUp extends Component {
               label="Пароль"
               placeholder="Пароль"
               name="password"
+              register={register}
+							setvalue={setValue}
               fullWidth
               required
             />
@@ -87,15 +111,15 @@ class SingUp extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => auth;
+const mapStateToProps = state => ({
+  isLoggedIn: getIsLoggedIn(state),
+  error: getError(state)
+})
+
 const mapDispatchToProps = {
-  sendRegistrationRequest
+  sendRegisterRequest
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps)(SingUp)
-
-
-
-

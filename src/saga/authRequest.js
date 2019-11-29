@@ -4,10 +4,12 @@ import {
   fetchAuthSuccess,
   fetchAuthFailure,
   doAuthLogout,
-  sendRegistrationRequest
+  sendRegisterFailure,
+	sendRegisterSuccess,
+	sendRegisterRequest
 } from '../redux/actions/actions';
-import { authorize, regUser } from '../redux/middlewares/serverconnect';
-
+import { authorize } from '../redux/middlewares/serverconnect';
+import * as api from "../redux/middlewares/api";
 
 export function* watchFetchAuthRequest() {
   yield takeLatest(fetchAuthRequest, function*({ payload }) {
@@ -32,16 +34,21 @@ export function* watchDoAuthLogout() {
   });
 }
 
+export function* sendRegisterRequestSaga(action) {
+	try {
+		const path = "register";
+		const response = yield call(api.postAuthRequest, action.payload, path);
+		yield call(api.saveToken, response.token);
+		yield put(sendRegisterSuccess());
+	} catch (error) {
+		yield put(sendRegisterFailure(error));
+		console.log(error);
+	}
+}
 
-export function* userRegistration(){
-  yield takeEvery(sendRegistrationRequest, function* (action){
-      try{
-          console.log(action)
-          const result = yield call(regUser,action)
-          console.log(result)
-      }
-      catch(error){
-        console.log('Error')
-      }
-  })
+export function* registerSaga() {
+	yield takeEvery(sendRegisterRequest, sendRegisterRequestSaga);
+	yield takeEvery(doAuthLogout, function() {
+		window.localStorage.removeItem("token");
+	});
 }
