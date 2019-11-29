@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from 'react-router-dom'
-//import { connect } from 'react-redux';
-//import { fetchAuthRequest } from '../../redux/reducer';
+import { connect } from 'react-redux';
+import { sendRegistrationRequest } from '../../redux/reducer';
 import "../LoginForm/LoginForm.css";
 
 import Paper from "@material-ui/core/Card";
@@ -70,7 +70,7 @@ class SingUp extends Component {
               required
             />
             <Button
-              component={ NavLink } to='/login'
+
               type="submit"
               variant="contained"
               style={{ marginTop: "40px", backgroundColor: "#ffc617", color: "black" }}
@@ -87,12 +87,14 @@ class SingUp extends Component {
   }
 }
 
-// const mapStateToProps = ({ auth }) => auth;
-// const mapDispatchToProps = {
-//   fetchAuthRequest
-// };
+const mapStateToProps = ({ auth }) => auth;
+const mapDispatchToProps = {
+  sendRegistrationRequest
+}
 
-export default SingUp
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)(SingUp)
 
 
 

@@ -4,7 +4,8 @@ import {
   fetchAuthRequest,
   fetchAuthSuccess,
   fetchAuthFailure,
-  doAuthLogout
+  doAuthLogout,
+  sendRegistrationRequest
 } from '../actions/actions';
 
 const isLoading = handleActions(
@@ -14,7 +15,7 @@ const isLoading = handleActions(
     [fetchAuthFailure]: () => false
   },
   false
-);
+)
 
 const isLoggedIn = handleActions(
   {
@@ -22,7 +23,7 @@ const isLoggedIn = handleActions(
     [doAuthLogout]: () => false
   },
   localStorage.getItem('isLoggedIn') ? true : false
-);
+)
 
 const error = handleActions(
   {
@@ -30,10 +31,19 @@ const error = handleActions(
     [fetchAuthFailure]: (_store, { payload }) => payload
   },
   null
+)
+
+const isRegIn = handleActions(
+  {
+    [sendRegistrationRequest]: () => true,
+    [doAuthLogout]: () => false
+  },
+  localStorage.getItem('isRegIn') ? true : false
 );
 
 export default combineReducers({
   isLoading,
   isLoggedIn,
-  error
+  error,
+  isRegIn
 });
